@@ -65,16 +65,12 @@ public class MoneyLimitActivity extends AppCompatActivity {
         });
 
 
-        moneyQueryTask.getAllMoneys(new MoneyQueryTask.OnQuery<List<MoneyLimit>>() {
+        moneyQueryTask.getAllMoneys(new MoneyQueryTask.OnQuery<MoneyLimit>() {
             @Override
-            public void onResult(List<MoneyLimit> moneyLimits) {
-                for (int i = 0; i < moneyLimits.size(); i++) {
-                    moneyLimit = moneyLimits.get(i);
-                }
+            public void onResult(MoneyLimit moneyLimits) {
+                    moneyLimit = moneyLimits;
             }
         });
-
-
     }
 
     public void insertMoney() {
@@ -87,7 +83,7 @@ public class MoneyLimitActivity extends AppCompatActivity {
             editText2.setError("Không được để trống !!!");
         } else {
             moneyQueryTask.deleteMoneys(moneyLimit);
-            moneyLimit = new MoneyLimit(new Random().nextInt(), castInt(money), month);
+            moneyLimit = new MoneyLimit(castDouble(money), month);
             moneyQueryTask.insertMoneys(new MoneyQueryTask.OnQuery<long[]>() {
                 @Override
                 public void onResult(long[] longs) {
@@ -117,10 +113,10 @@ public class MoneyLimitActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    public int castInt(String a) {
-        int b = 0;
+    public Double castDouble(String a) {
+        Double b = 0.0;
         try {
-            b = Integer.parseInt(a);
+            b = Double.parseDouble(a);
         } catch (NumberFormatException e) {
             Log.e("NumberFormatException: ", e.toString());
         }

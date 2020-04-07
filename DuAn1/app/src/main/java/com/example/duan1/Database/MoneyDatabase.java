@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase;
 import com.example.duan1.DAO.MoneyLimitDAO;
 import com.example.duan1.model.MoneyLimit;
 
-@Database(entities = {MoneyLimit.class}, version = 1)
+@Database(entities = {MoneyLimit.class}, version = 1, exportSchema = false)
 public abstract class MoneyDatabase extends RoomDatabase {
     public abstract MoneyLimitDAO moneyLimitDAO();
 }

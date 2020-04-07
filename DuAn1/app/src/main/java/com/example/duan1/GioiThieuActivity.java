@@ -22,13 +22,17 @@ public class GioiThieuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gioi_thieu);
         text = (TextView) findViewById(R.id.text);
         MoneyQueryTask moneyQueryTask = new MoneyQueryTask(this);
-        moneyQueryTask.getAllMoneys(new MoneyQueryTask.OnQuery<List<MoneyLimit>>() {
+        moneyQueryTask.getAllMoneys(new MoneyQueryTask.OnQuery<MoneyLimit>() {
             @Override
-            public void onResult(List<MoneyLimit> moneyLimits) {
-                for (int i = 0; i < moneyLimits.size(); i++) {
+            public void onResult(MoneyLimit moneyLimits) {
 
-                    text.setText(String.valueOf(moneyLimits.get(i).money));
-                }
+                    try{
+                        text.setText(String.valueOf(moneyLimits.money));
+                    }
+                   catch (NullPointerException e){
+
+                   }
+
 
             }
         });

@@ -21,13 +21,14 @@ import com.example.duan1.Database.MoneyDatabase;
 import com.example.duan1.Task.MoneyQueryTask;
 import com.example.duan1.model.KhoanChi;
 import com.example.duan1.model.MoneyLimit;
+import com.example.duan1.model.MoneyResult;
 import com.example.duan1.model.MyAlerDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 import java.util.List;
 
-public class ListKhoanChiActivity extends AppCompatActivity {
+public class ListKhoanChiActivity extends AppCompatActivity implements MoneyResult {
     private RecyclerView rcView;
     private FloatingActionButton flt, fabMoneyLimit, fabListKhoanChi;
     KhoanChiAdapter khoanChiAdapter;
@@ -37,7 +38,8 @@ public class ListKhoanChiActivity extends AppCompatActivity {
     boolean isFab = false;
     MoneyQueryTask moneyQueryTask;
     MoneyLimit moneyLimit;
-    int money;
+    Double money = 0.0;
+    Double tienchi = 0.0;
 
 
     @Override
@@ -45,17 +47,15 @@ public class ListKhoanChiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_khoan_chi);
 
-
-
         AnhXa();
 
         flt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isFab == false){
+                if (isFab == false) {
                     move();
                     isFab = true;
-                }else {
+                } else {
                     back();
                     isFab = false;
                 }
@@ -75,33 +75,23 @@ public class ListKhoanChiActivity extends AppCompatActivity {
             }
         });
 
-        moneyQueryTask.getAllMoneys(new MoneyQueryTask.OnQuery<List<MoneyLimit>>() {
-            @Override
-            public void onResult(List<MoneyLimit> moneyLimits) {
-                for (int i = 0; i < moneyLimits.size(); i++) {
-                    moneyLimit = moneyLimits.get(i);
-                }
-                if (moneyLimit != null){
-                    money = moneyLimit.money;
-                }
-            }
-        });
+        moneyQueryTask = new MoneyQueryTask(this);
+        moneyQueryTask.getMoneys(this);
 
-        if (khoanChiDAO.getChi() == null){
-            moneyQueryTask.deleteMoneys(moneyLimit);
-        }
-        else if (khoanChiDAO.getChi() > money) {
-            MyAlerDialog myAlerDialog = new MyAlerDialog(this);
-            myAlerDialog.getAlert();
-        }
+
+
     }
-    public void AnhXa(){
-        khoanChiDAO = new KhoanChiDAO(this);
+
+    public void AnhXa() {
+
+        khoanChiDAO = new KhoanChiDAO(ListKhoanChiActivity.this);
         list = khoanChiDAO.getAllKhoanChi();
+        tienchi = khoanChiDAO.getChi();
+        moneyLimit = new MoneyLimit();
         rcView = (RecyclerView) findViewById(R.id.rcView);
         flt = (FloatingActionButton) findViewById(R.id.flt);
-        khoanChiAdapter = new KhoanChiAdapter(list,ListKhoanChiActivity.this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ListKhoanChiActivity.this,LinearLayoutManager.VERTICAL,false);
+        khoanChiAdapter = new KhoanChiAdapter(list, ListKhoanChiActivity.this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ListKhoanChiActivity.this, LinearLayoutManager.VERTICAL, false);
         rcView.setLayoutManager(linearLayoutManager);
         rcView.setAdapter(khoanChiAdapter);
         fabMoneyLimit = findViewById(R.id.fabMoneyLimit);
@@ -110,7 +100,6 @@ public class ListKhoanChiActivity extends AppCompatActivity {
         moveTrai = AnimationUtils.loadAnimation(this, R.anim.move_trai);
         backTren = AnimationUtils.loadAnimation(this, R.anim.back_tren);
         backTrai = AnimationUtils.loadAnimation(this, R.anim.back_trai);
-        moneyQueryTask = new MoneyQueryTask(this);
     }
 
     public void move() {
@@ -124,7 +113,8 @@ public class ListKhoanChiActivity extends AppCompatActivity {
         fabListKhoanChi.setLayoutParams(layoutParams1);
         fabListKhoanChi.setAnimation(moveTrai);
     }
-    public void back(){
+
+    public void back() {
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) fabMoneyLimit.getLayoutParams();
         layoutParams.bottomMargin -= (int) (fabMoneyLimit.getWidth() * 3);
         fabMoneyLimit.setLayoutParams(layoutParams);
@@ -135,4 +125,27 @@ public class ListKhoanChiActivity extends AppCompatActivity {
         fabListKhoanChi.setLayoutParams(layoutParams1);
         fabListKhoanChi.setAnimation(backTrai);
     }
+
+    @Override
+    public void keyQua(MoneyLimit moneyLimit) {
+        try{
+            money = moneyLimit.money;
+            if (tienchi != null){
+                if (tienchi > money) {
+                    MyAlerDialog myAlerDialog = new MyAlerDialog(ListKhoanChiActivity.this);
+                    myAlerDialog.getAlert();
+                    Log.e("tienchi", " " + tienchi);
+                    Log.e("tienchi", " " + tienchi);Log.e("money", " " + money);
+
+                }
+            }
+            else {
+                moneyQueryTask.deleteMoneys(moneyLimit);
+            }
+        }catch (NullPointerException e){
+
+        }
+    }
+
+
 }

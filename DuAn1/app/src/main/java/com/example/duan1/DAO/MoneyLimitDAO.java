@@ -12,7 +12,7 @@ import java.util.List;
 @Dao
 public interface MoneyLimitDAO {
     @Query("SELECT * FROM moneylimit")
-    List<MoneyLimit> getListMoney();
+    MoneyLimit getMoney();
     @Insert
     long[] insertMoney(MoneyLimit... moneyLimits);
     @Delete

@@ -24,13 +24,14 @@ import com.example.duan1.DAO.LoaiChiDAO;
 import com.example.duan1.Task.MoneyQueryTask;
 import com.example.duan1.model.KhoanChi;
 import com.example.duan1.model.MoneyLimit;
+import com.example.duan1.model.MoneyResult;
 import com.example.duan1.model.MyAlerDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-public class KhoanChiActivity extends AppCompatActivity {
+public class KhoanChiActivity extends AppCompatActivity implements MoneyResult {
     private EditText edtTenKhoanChi;
     private Spinner spnKhoanChi;
     private EditText edtSoTienChi;
@@ -48,8 +49,11 @@ public class KhoanChiActivity extends AppCompatActivity {
     public SimpleDateFormat simpleDateFormat;
     public Calendar calendar;
     int loaichi;
+    MoneyQueryTask moneyQueryTask;
     MoneyLimit moneyLimit;
-    int money;
+    Double money = 0.0;
+    Double tienchi = 0.0;
+    MyAlerDialog myAlerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,21 +61,10 @@ public class KhoanChiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_khoan_chi);
         AnhXa();
 
-        MoneyQueryTask moneyQueryTask = new MoneyQueryTask(this);
-        moneyQueryTask.getAllMoneys(new MoneyQueryTask.OnQuery<List<MoneyLimit>>() {
-            @Override
-            public void onResult(List<MoneyLimit> moneyLimits) {
-                for (int i = 0; i < moneyLimits.size(); i++) {
-                    moneyLimit = moneyLimits.get(i);
-                }
-                if (moneyLimit != null){
-                    money = moneyLimit.money;
-                }
-            }
-        });
-        if (khoanChiDAO.getChi() == null){
-            moneyQueryTask.deleteMoneys(moneyLimit);
-        }
+        moneyQueryTask = new MoneyQueryTask(this);
+        moneyQueryTask.getMoneys(this);
+
+
         btnThemKhoanChi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,24 +73,23 @@ public class KhoanChiActivity extends AppCompatActivity {
                     String tenchi = edtTenKhoanChi.getText().toString().trim();
                     String sotien = edtSoTienChi.getText().toString().trim();
                     String ngaychi = edtNgayChi.getText().toString().trim();
-                        if (tenchi.isEmpty() && sotien.isEmpty() && ngaychi.isEmpty()) {
-                            edtTenKhoanChi.setError("Không được để trống !");
-                            edtSoTienChi.setError("Không được để trống !");
-                            edtNgayChi.setError("Không được để trống !");
-                        } else {
-                            if (khoanChiDAO.getChi() > money){
-                                MyAlerDialog myAlerDialog = new MyAlerDialog(KhoanChiActivity.this);
-                                myAlerDialog.getAlert();
-                            }
-                            KhoanChi khoanChi = new KhoanChi(null, tenchi, loaichi, Integer.parseInt(sotien), ngaychi,
-                                    edtGhiChuChi.getText().toString());
-                            if (khoanChiDAO.insertKhoanChi(khoanChi) > 0) {
-                                Toast.makeText(KhoanChiActivity.this, "Thêm Thành Công!", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(KhoanChiActivity.this, ListKhoanChiActivity.class));
-                            } else {
-                                Toast.makeText(KhoanChiActivity.this, "Thêm thất bại!", Toast.LENGTH_SHORT).show();
-                            }
+                    if (tenchi.isEmpty() && sotien.isEmpty() && ngaychi.isEmpty()) {
+                        edtTenKhoanChi.setError("Không được để trống !");
+                        edtSoTienChi.setError("Không được để trống !");
+                        edtNgayChi.setError("Không được để trống !");
+                    } else {
+                        if (khoanChiDAO.getChi() > money) {
+                            myAlerDialog.getAlert();
                         }
+                        KhoanChi khoanChi = new KhoanChi(null, tenchi, loaichi, Integer.parseInt(sotien), ngaychi,
+                                edtGhiChuChi.getText().toString());
+                        if (khoanChiDAO.insertKhoanChi(khoanChi) > 0) {
+                            Toast.makeText(KhoanChiActivity.this, "Thêm Thành Công!", Toast.LENGTH_SHORT).show();
+                            //startActivity(new Intent(KhoanChiActivity.this, ListKhoanChiActivity.class));
+                        } else {
+                            Toast.makeText(KhoanChiActivity.this, "Thêm thất bại!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 } catch (NumberFormatException e) {
 
                 }
@@ -138,6 +130,7 @@ public class KhoanChiActivity extends AppCompatActivity {
     }
 
     public void AnhXa() {
+        myAlerDialog = new MyAlerDialog(KhoanChiActivity.this);
         edtTenKhoanChi = (EditText) findViewById(R.id.edtTenKhoanChi);
         spnKhoanChi = (Spinner) findViewById(R.id.spnKhoanChi);
         edtSoTienChi = (EditText) findViewById(R.id.edtSoTienChi);
@@ -148,6 +141,7 @@ public class KhoanChiActivity extends AppCompatActivity {
         btnChonNgay = (Button) findViewById(R.id.btnChonNgay);
         btnSuaKhoanChi = (Button) findViewById(R.id.btnSuaKhoanChi);
         khoanChiDAO = new KhoanChiDAO(KhoanChiActivity.this);
+        tienchi = khoanChiDAO.getChi();
         loaiChiDAO = new LoaiChiDAO(this);
         arrayList = loaiChiDAO.getTenLoaiChi();
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayList);
@@ -189,4 +183,25 @@ public class KhoanChiActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
+    @Override
+    public void keyQua(MoneyLimit moneyLimit) {
+        try{
+            money = moneyLimit.money;
+            if (tienchi != null){
+                if (tienchi > money) {
+                    MyAlerDialog myAlerDialog = new MyAlerDialog(KhoanChiActivity.this);
+                    myAlerDialog.getAlert();
+                    Log.e("tienchi", " " + tienchi);
+                    Log.e("tienchi", " " + tienchi);Log.e("money", " " + money);
+
+                }
+            }
+            else {
+                moneyQueryTask.deleteMoneys(moneyLimit);
+            }
+
+        }catch (NullPointerException e){
+
+        }
+    }
 }

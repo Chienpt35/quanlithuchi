@@ -7,21 +7,32 @@ import androidx.room.PrimaryKey;
 @Entity
 public class MoneyLimit {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int id;
 
     @ColumnInfo(name = "money")
-    public int money;
+    public Double money;
 
     @ColumnInfo(name = "month")
     public String month;
 
-    public MoneyLimit(int id, int money, String month) {
-        this.id = id;
+    public MoneyLimit(Double money, String month) {
         this.money = money;
         this.month = month;
     }
 
     public MoneyLimit() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Double getMoney() {
+        return money;
+    }
+
+    public String getMonth() {
+        return month;
     }
 }
