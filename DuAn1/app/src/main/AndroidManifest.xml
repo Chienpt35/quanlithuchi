@@ -9,16 +9,57 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:theme="@style/AppTheme1" android:label="Danh Sách Khoản Chi" android:parentActivityName=".MainActivity" android:name=".ListKhoanChiActivity"></activity>
-        <activity android:theme="@style/AppTheme1" android:label="Danh Sách Khoản Thu" android:parentActivityName=".MainActivity" android:name=".ListKhoanThuActivity" />
-        <activity android:theme="@style/AppTheme1" android:label="Danh Sách Loại Thu" android:parentActivityName=".MainActivity" android:name=".ListLoaiThuActivity" />
-        <activity android:theme="@style/AppTheme1" android:label="Danh Sách Loại Chi" android:parentActivityName=".MainActivity" android:name=".ListLoaiChiActivity" />
-        <activity android:theme="@style/AppTheme1" android:label="Thống Kê" android:parentActivityName=".MainActivity" android:name=".ThongKeActivity" />
-        <activity android:theme="@style/AppTheme1" android:label="Giới Thiệu" android:parentActivityName=".MainActivity" android:name=".GioiThieuActivity" />
-        <activity android:theme="@style/AppTheme1" android:label="Loại Chi" android:parentActivityName=".ListLoaiChiActivity" android:name=".LoaiChiActivity" />
-        <activity android:theme="@style/AppTheme1" android:label="Khoản Chi" android:parentActivityName=".ListKhoanChiActivity" android:name=".KhoanChiActivity" />
-        <activity android:theme="@style/AppTheme1" android:label="Loại Thu" android:parentActivityName=".ListLoaiThuActivity" android:name=".LoaiThuActivity" />
-        <activity android:theme="@style/AppTheme1" android:label="Khoản Thu" android:parentActivityName=".ListKhoanThuActivity" android:name=".KhoanThuActivity" />
+        <activity android:name=".MoneyLimitActivity"></activity>
+        <activity
+            android:name=".ListKhoanChiActivity"
+            android:label="Danh Sách Khoản Chi"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name=".ListKhoanThuActivity"
+            android:label="Danh Sách Khoản Thu"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name=".ListLoaiThuActivity"
+            android:label="Danh Sách Loại Thu"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name=".ListLoaiChiActivity"
+            android:label="Danh Sách Loại Chi"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name=".ThongKeActivity"
+            android:label="Thống Kê"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name=".GioiThieuActivity"
+            android:label="Giới Thiệu"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name=".LoaiChiActivity"
+            android:label="Loại Chi"
+            android:parentActivityName=".ListLoaiChiActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name=".KhoanChiActivity"
+            android:label="Khoản Chi"
+            android:parentActivityName=".ListKhoanChiActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name=".LoaiThuActivity"
+            android:label="Loại Thu"
+            android:parentActivityName=".ListLoaiThuActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name=".KhoanThuActivity"
+            android:label="Khoản Thu"
+            android:parentActivityName=".ListKhoanThuActivity"
+            android:theme="@style/AppTheme1" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

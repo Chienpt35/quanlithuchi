@@ -6,120 +6,144 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".LoaiChiActivity">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/poly"
-        android:layout_margin="10dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Tên Khoản Chi"
-        android:padding="8dp"
-        android:textColor="@color/colorText"/>
-    <EditText
-        android:id="@+id/edtTenKhoanChi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:padding="8dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="Loại Chi"
-        android:padding="8dp"
-        android:textColor="@color/colorText"/>
-    <Spinner
-        android:id="@+id/spnKhoanChi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </Spinner>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Số tiền"
-        android:padding="8dp"
-        android:textColor="@color/colorText"/>
-    <EditText
-        android:id="@+id/edtSoTienChi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_margin="10dp"
-        android:padding="8dp"
-        android:inputType="number"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Ngày Chi"
-        android:padding="8dp"
-        android:textColor="@color/colorText"/>
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3">
-        <EditText
-            android:id="@+id/edtNgayChi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2.8"
-            android:layout_marginTop="5dp"
-            android:layout_margin="10dp"
-            android:padding="8dp"/>
-        <Button
-            android:id="@+id/btnChonNgay"
-            android:layout_weight="0.2"
-            android:text="..."
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            />
-    </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Ghi Chú"
-        android:padding="8dp"
-        android:textColor="@color/colorText"/>
-    <EditText
-        android:id="@+id/edtGhiChuChi"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="5dp"
-        android:layout_margin="10dp"
-        android:padding="8dp"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-        <Button
-            android:id="@+id/btnThemKhoanChi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_gravity="center"
-            android:text="Thêm"/>
-        <Button
-            android:id="@+id/btnSuaKhoanChi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_gravity="center"
-            android:text="Sửa"/>
-        <Button
-            android:id="@+id/btnDSKhoanChi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Danh Sách"/>
-    </LinearLayout>
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/poly" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="8dp"
+                android:text="Tên Khoản Chi"
+                android:textColor="@color/colorText" />
+
+            <EditText
+                android:id="@+id/edtTenKhoanChi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="8dp"
+                android:text="Loại Chi"
+                android:textColor="@color/colorText" />
+
+            <Spinner
+                android:id="@+id/spnKhoanChi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></Spinner>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="8dp"
+                android:text="Số tiền"
+                android:textColor="@color/colorText" />
+
+            <EditText
+                android:id="@+id/edtSoTienChi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="5dp"
+                android:inputType="number"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="8dp"
+                android:text="Ngày Chi"
+                android:textColor="@color/colorText" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <EditText
+                    android:id="@+id/edtNgayChi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="2.8"
+                    android:padding="8dp" />
+
+                <Button
+                    android:id="@+id/btnChonNgay"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="0.2"
+                    android:text="..." />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="8dp"
+                android:text="Ghi Chú"
+                android:textColor="@color/colorText" />
+
+            <EditText
+                android:id="@+id/edtGhiChuChi"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:layout_marginTop="5dp"
+                android:padding="8dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <Button
+                    android:id="@+id/btnThemKhoanChi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="Thêm" />
+
+                <Button
+                    android:id="@+id/btnSuaKhoanChi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="Sửa" />
+
+                <Button
+                    android:id="@+id/btnDSKhoanChi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Danh Sách" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

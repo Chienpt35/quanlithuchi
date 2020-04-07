@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
+    android:id="@+id/frameLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="40dp">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabMoneyLimit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="100dp"
         android:src="@drawable/iconfinder_board"
         android:visibility="invisible"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -18,8 +18,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="170dp"
-        android:src="@drawable/iconfinder_list"
+        android:src="@drawable/iconfinder_document_text"
         android:visibility="invisible"/>
 </FrameLayout>

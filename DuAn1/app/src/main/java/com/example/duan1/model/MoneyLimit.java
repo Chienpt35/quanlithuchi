@@ -13,9 +13,15 @@ public class MoneyLimit {
     @ColumnInfo(name = "money")
     public int money;
 
-    @ColumnInfo(name = "dateBegin")
-    public int dateBegin;
+    @ColumnInfo(name = "month")
+    public String month;
 
-    @ColumnInfo(name = "dateFinish")
-    public int dateFinish;
+    public MoneyLimit(int id, int money, String month) {
+        this.id = id;
+        this.money = money;
+        this.month = month;
+    }
+
+    public MoneyLimit() {
+    }
 }
