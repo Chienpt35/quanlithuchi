@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoaiChiActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/poly"
+        android:layout_margin="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Tên Khoản Thu"
+        android:padding="8dp"
+        android:textColor="@color/colorText"/>
+    <EditText
+        android:id="@+id/edtTenKhoanThu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="8dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Loại Thu"
+        android:padding="8dp"
+        android:textColor="@color/colorText"/>
+    <Spinner
+        android:id="@+id/spnKhoanThu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </Spinner>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Số tiền"
+        android:padding="8dp"
+        android:textColor="@color/colorText"/>
+    <EditText
+        android:id="@+id/edtSoTienThu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:layout_margin="10dp"
+        android:padding="8dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Ngày Thu"
+        android:padding="8dp"
+        android:textColor="@color/colorText"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+        <EditText
+            android:id="@+id/edtNgayThu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.8"
+            android:layout_margin="5dp"
+            android:padding="8dp"/>
+        <Button
+            android:id="@+id/btnChonNgay"
+            android:layout_weight="0.2"
+            android:text="..."
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+           android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Ghi Chú"
+        android:padding="8dp"
+        android:textColor="@color/colorText"/>
+    <EditText
+        android:id="@+id/edtGhiChuThu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:padding="8dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <Button
+            android:id="@+id/btnThemKhoanThu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Thêm"/>
+        <Button
+            android:id="@+id/btnSuaKhoanThu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Sửa"/>
+        <Button
+            android:id="@+id/btnDSKhoanThu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Danh Sách"/>
+    </LinearLayout>
+
+
+</LinearLayout>
