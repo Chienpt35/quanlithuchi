@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.duan1.Database.MoneyDatabase;
 import com.example.duan1.Task.MoneyQueryTask;
 import com.example.duan1.model.MoneyLimit;
+import com.example.duan1.model.MoneyResult;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
-public class MoneyLimitActivity extends AppCompatActivity {
+public class MoneyLimitActivity extends AppCompatActivity implements MoneyResult {
     private EditText editText;
     private EditText editText2;
     private Button button, button2;
@@ -34,11 +35,10 @@ public class MoneyLimitActivity extends AppCompatActivity {
     private MoneyLimit moneyLimit;
     private List<MoneyLimit> list = new ArrayList<>();
     int ngay, thang, nam;
-    int ngayCheck, thangCheck;
-    String check;
-    public static final int[] chan = {1,3,5,7,9,11};
-    public static final int[] le = {4,6,8,10,12};
-    public static int thang2 = 2;
+    String check, ngayCheck, thangCheck;
+    public static final String[] le = {"01","03","05","07","09","11"};
+    public static final String[] chan = {"04","06","08","10","12"};
+    public static String thang2 = "02";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,12 +65,7 @@ public class MoneyLimitActivity extends AppCompatActivity {
         });
 
 
-        moneyQueryTask.getAllMoneys(new MoneyQueryTask.OnQuery<MoneyLimit>() {
-            @Override
-            public void onResult(MoneyLimit moneyLimits) {
-                    moneyLimit = moneyLimits;
-            }
-        });
+        moneyQueryTask.getMoneys(this);
     }
 
     public void insertMoney() {
@@ -106,8 +101,16 @@ public class MoneyLimitActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                calendar.set(year, month, dayOfMonth);
-                editText2.setText(simpleDateFormat.format(calendar.getTimeInMillis()));
+
+                if (thang == month){
+                    calendar.set(year, month, dayOfMonth);
+                    editText2.setText(simpleDateFormat.format(calendar.getTimeInMillis()));
+                    button2.setEnabled(true);
+                }else {
+                    button2.setEnabled(false);
+                    Toast.makeText(MoneyLimitActivity.this, "Bạn đã chọn sai tháng", Toast.LENGTH_SHORT).show();
+                }
+
             }
         }, nam, thang, ngay);
         datePickerDialog.show();
@@ -121,5 +124,24 @@ public class MoneyLimitActivity extends AppCompatActivity {
             Log.e("NumberFormatException: ", e.toString());
         }
         return b;
+    }
+
+    @Override
+    public void keyQua(MoneyLimit moneyLimit) {
+        check = moneyLimit.month;
+        thangCheck = check.substring(3,5);
+        String ngay = check.substring(0,2);
+        if (thangCheck.equals(chan)){
+            ngayCheck = "30";
+        }
+        else if (thangCheck.equals(thang2)){
+            ngayCheck = "29";
+        }
+        else if (thangCheck.equals(le)){
+            ngayCheck = "31";
+        }
+        if (ngay.equals(ngayCheck)){
+            moneyQueryTask.deleteMoneys(moneyLimit);
+        }
     }
 }
